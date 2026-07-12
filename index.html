@@ -2,93 +2,533 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+
+    <!-- Permite que el diseño se adapte correctamente a celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Certificats et formations professionnelles dans le domaine aéroportuaire."
+    >
+
     <title>Mes Certificats Aéroportuaires</title>
+
     <style>
+        :root {
+            --background: #f4f6f9;
+            --surface: #ffffff;
+            --text: #172033;
+            --text-light: #667085;
+            --border: #e4e7ec;
+            --primary: #2457c5;
+            --primary-dark: #183f98;
+            --shadow: 0 5px 18px rgba(16, 24, 40, 0.07);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f9f9f9;
-            color: #333;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.5;
         }
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .certificat {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-        }
-        .certificat h2 {
-            margin-bottom: 10px;
+
+        /* Encabezado principal */
+
+        .hero {
+            padding: 55px 20px 45px;
+            background: linear-gradient(135deg, #173d82, #2866ce);
+            color: #ffffff;
             text-align: center;
         }
-        .certificat a {
-            display: inline-block;
+
+        .hero-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 18px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.12);
+            font-size: 30px;
+        }
+
+        .hero h1 {
+            max-width: 850px;
+            margin: 0 auto 12px;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.15;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+        }
+
+        /* Contenido */
+
+        .container {
+            width: min(1180px, calc(100% - 32px));
+            margin: 40px auto 60px;
+        }
+
+        .category {
+            margin-bottom: 32px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background-color: var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .category-header {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 22px 24px;
+            border-bottom: 1px solid var(--border);
+            background-color: #fafbfc;
+        }
+
+        .category-icon {
+            display: flex;
+            flex: 0 0 46px;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background-color: #e8efff;
+            color: var(--primary);
+            font-size: 22px;
+        }
+
+        .category-header h2 {
+            margin: 0 0 3px;
+            font-size: 1.35rem;
+        }
+
+        .category-header p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.94rem;
+        }
+
+        /* Cuadrícula de certificados */
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            padding: 24px;
+        }
+
+        .certificate-card {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            min-height: 150px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background-color: #ffffff;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-3px);
+            border-color: #b9c8e8;
+            box-shadow: 0 10px 24px rgba(16, 24, 40, 0.09);
+        }
+
+        .pdf-icon {
+            display: flex;
+            flex: 0 0 68px;
+            align-items: center;
+            justify-content: center;
+            width: 68px;
+            height: 78px;
+            border-radius: 10px;
+            background-color: #eef3ff;
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .certificate-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .certificate-content h3 {
+            margin: 0 0 15px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .certificate-link {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
             padding: 10px 15px;
-            background-color: #007BFF;
-            color: #fff;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 5px;
+            transition:
+                background-color 0.2s ease,
+                transform 0.2s ease;
         }
-        .certificat a:hover {
-            background-color: #0056b3;
+
+        .certificate-link:hover {
+            transform: translateY(-1px);
+            background-color: var(--primary-dark);
+        }
+
+        .certificate-link:focus-visible {
+            outline: 3px solid rgba(36, 87, 197, 0.25);
+            outline-offset: 3px;
+        }
+
+        /* Pie de página */
+
+        footer {
+            padding: 25px 20px;
+            border-top: 1px solid var(--border);
+            background-color: #ffffff;
+            color: var(--text-light);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Diseño para tabletas */
+
+        @media (max-width: 850px) {
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Diseño para celulares */
+
+        @media (max-width: 520px) {
+            .hero {
+                padding: 42px 18px 36px;
+            }
+
+            .container {
+                width: min(100% - 20px, 1180px);
+                margin-top: 24px;
+            }
+
+            .category {
+                border-radius: 12px;
+            }
+
+            .category-header {
+                align-items: flex-start;
+                padding: 18px;
+            }
+
+            .certificates-grid {
+                gap: 14px;
+                padding: 15px;
+            }
+
+            .certificate-card {
+                flex-direction: column;
+                align-items: flex-start;
+                min-height: auto;
+                padding: 18px;
+            }
+
+            .pdf-icon {
+                width: 58px;
+                height: 62px;
+                flex-basis: 62px;
+            }
+
+            .certificate-link {
+                width: 100%;
+            }
         }
     </style>
 </head>
+
 <body>
-    <h1>Mes Certificats Aéroportuaires</h1>
+    <header class="hero">
+        <div class="hero-icon" aria-hidden="true">✈</div>
 
-    <!-- Certificat 1 -->
-    <div class="certificat">
-        <h2>Pasaje Initial / Formation Initiale Passagers</h2>
-        <a href="certificat1.pdf" target="_blank">Voir / Télécharger le certificat</a>
-    </div>
+        <h1>Mes Certificats Aéroportuaires</h1>
 
-    <!-- Certificat 2 -->
-    <div class="certificat">
-        <h2>Sécurité Aéroportuaire</h2>
-        <a href="certificat2.pdf" target="_blank">Voir / Télécharger le certificat</a>
-    </div>
+        <p>
+            Certificats, formations et expériences professionnelles
+            dans le domaine aéroportuaire.
+        </p>
+    </header>
 
-    <!-- Certificat 3 -->
-    <div class="certificat">
-        <h2>Certificat AVSAF Piétons</h2>
-        <a href="certificat3.pdf" target="_blank">Voir / Télécharger le certificat</a>
-    </div>
-    <!-- Certificat 4 -->
-    <div class="certificat">
-        <h2>Lettre de recommandation directeur d'aéroport</h2>
-        <a href="certificat4.pdf" target="_blank">Voir / Télécharger le certificat</a>
-    </div>
-     <!-- Certificat 5 -->
-    <div class="certificat">
-        <h2>Sécurité opérationnelle (Paranair)</h2>
-        <a href="certificat5.pdf" target="_blank">Voir / Télécharger le certificat</a>
-    </div>
-        <!-- Certificat 6 -->
-    <div class="certificat">
-        <h2>Vérification des documents </h2>
-        <a href="certificat6.pdf" target="_blank">Voir / Télécharger le certificat</a>
-    </div>
+    <main class="container">
 
-        <!-- Certificat 7 -->
-    <div class="certificat">
-        <h2>Marchandises dangereuses</h2>
-        <a href="certificat7.pdf" target="_blank">Voir / Télécharger le certificat</a>
-    </div>
-        <!-- Certificat 8 -->
-    <div class="certificat">
-        <h2>Sécurité aéroportuaire de base</h2>
-        <a href="certificat8.pdf" target="_blank">Voir / Télécharger le certificat</a>
-    </div>
+        <!-- Catégorie 1 -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon" aria-hidden="true">👤</div>
 
-        <!-- Certificat 9-->
-    <div class="certificat">
-        <h2>Marchandises dangereuses (Skyairline)</h2>
-        <a href="certificat9.pdf" target="_blank">Voir / Télécharger le certificat</a>
-    </div>
+                <div>
+                    <h2>Service aux passagers</h2>
+                    <p>
+                        Formations liées à l'accueil, au service
+                        et à l'assistance des passagers.
+                    </p>
+                </div>
+            </div>
+
+            <div class="certificates-grid">
+                <article class="certificate-card">
+                    <div class="pdf-icon" aria-hidden="true">PDF</div>
+
+                    <div class="certificate-content">
+                        <h3>
+                            Pasaje Initial / Formation Initiale Passagers
+                        </h3>
+
+                        <a
+                            class="certificate-link"
+                            href="certificat1.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span aria-hidden="true">↗</span>
+                            Voir le certificat
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Catégorie 2 -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon" aria-hidden="true">🛡</div>
+
+                <div>
+                    <h2>Sécurité aéroportuaire</h2>
+                    <p>
+                        Certificats liés à la sûreté et à la sécurité
+                        des opérations aéroportuaires.
+                    </p>
+                </div>
+            </div>
+
+            <div class="certificates-grid">
+                <article class="certificate-card">
+                    <div class="pdf-icon" aria-hidden="true">PDF</div>
+
+                    <div class="certificate-content">
+                        <h3>Sécurité Aéroportuaire</h3>
+
+                        <a
+                            class="certificate-link"
+                            href="certificat2.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span aria-hidden="true">↗</span>
+                            Voir le certificat
+                        </a>
+                    </div>
+                </article>
+
+                <article class="certificate-card">
+                    <div class="pdf-icon" aria-hidden="true">PDF</div>
+
+                    <div class="certificate-content">
+                        <h3>Certificat AVSAF Piétons</h3>
+
+                        <a
+                            class="certificate-link"
+                            href="certificat3.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span aria-hidden="true">↗</span>
+                            Voir le certificat
+                        </a>
+                    </div>
+                </article>
+
+                <article class="certificate-card">
+                    <div class="pdf-icon" aria-hidden="true">PDF</div>
+
+                    <div class="certificate-content">
+                        <h3>Sécurité opérationnelle — Paranair</h3>
+
+                        <a
+                            class="certificate-link"
+                            href="certificat5.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span aria-hidden="true">↗</span>
+                            Voir le certificat
+                        </a>
+                    </div>
+                </article>
+
+                <article class="certificate-card">
+                    <div class="pdf-icon" aria-hidden="true">PDF</div>
+
+                    <div class="certificate-content">
+                        <h3>Sécurité aéroportuaire de base</h3>
+
+                        <a
+                            class="certificate-link"
+                            href="certificat8.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span aria-hidden="true">↗</span>
+                            Voir le certificat
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Catégorie 3 -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon" aria-hidden="true">📋</div>
+
+                <div>
+                    <h2>Opérations et documentation</h2>
+                    <p>
+                        Formations relatives aux procédures,
+                        aux documents et aux marchandises dangereuses.
+                    </p>
+                </div>
+            </div>
+
+            <div class="certificates-grid">
+                <article class="certificate-card">
+                    <div class="pdf-icon" aria-hidden="true">PDF</div>
+
+                    <div class="certificate-content">
+                        <h3>Vérification des documents</h3>
+
+                        <a
+                            class="certificate-link"
+                            href="certificat6.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span aria-hidden="true">↗</span>
+                            Voir le certificat
+                        </a>
+                    </div>
+                </article>
+
+                <article class="certificate-card">
+                    <div class="pdf-icon" aria-hidden="true">PDF</div>
+
+                    <div class="certificate-content">
+                        <h3>Marchandises dangereuses</h3>
+
+                        <a
+                            class="certificate-link"
+                            href="certificat7.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span aria-hidden="true">↗</span>
+                            Voir le certificat
+                        </a>
+                    </div>
+                </article>
+
+                <article class="certificate-card">
+                    <div class="pdf-icon" aria-hidden="true">PDF</div>
+
+                    <div class="certificate-content">
+                        <h3>Marchandises dangereuses — Sky Airline</h3>
+
+                        <a
+                            class="certificate-link"
+                            href="certificat9.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span aria-hidden="true">↗</span>
+                            Voir le certificat
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Catégorie 4 -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon" aria-hidden="true">★</div>
+
+                <div>
+                    <h2>Expérience et recommandations</h2>
+                    <p>
+                        Documents attestant l'expérience professionnelle
+                        et les recommandations reçues.
+                    </p>
+                </div>
+            </div>
+
+            <div class="certificates-grid">
+                <article class="certificate-card">
+                    <div class="pdf-icon" aria-hidden="true">PDF</div>
+
+                    <div class="certificate-content">
+                        <h3>
+                            Lettre de recommandation du directeur d'aéroport
+                        </h3>
+
+                        <a
+                            class="certificate-link"
+                            href="certificat4.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span aria-hidden="true">↗</span>
+                            Voir le document
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            © 2026 — Certificats aéroportuaires
+        </p>
+    </footer>
 </body>
 </html>
